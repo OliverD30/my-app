@@ -5,7 +5,7 @@ import React, {
   useImperativeHandle,
 } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import { Button, Modal, TextInput, Notification, Flex } from "@mantine/core";
+import { Button, Modal, TextInput, Flex } from "@mantine/core";
 import { useFocusTrap } from "@mantine/hooks";
 
 interface TextQuestionComponentProps {

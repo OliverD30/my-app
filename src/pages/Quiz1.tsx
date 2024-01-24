@@ -3,7 +3,7 @@ import TextQuestionComponent from "../components/TextQuestion";
 import { Button } from "@mantine/core";
 
 const QuizPage1: React.FC = () => {
-  const [questionsAndAnswers, setQuestionsAndAnswers] = useState<
+  const [questionsAndAnswers] = useState<
     Array<{ question: string; answer: string; questionNumber: number; clue: string; }>
   >([
     { question: "Vem har flest fortnite mvps i ranked trios?", answer: "oliver", questionNumber: 1, clue: 'Det är inte anton' },
