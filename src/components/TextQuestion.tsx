@@ -71,7 +71,7 @@ const TextQuestionComponent: React.ForwardRefRenderFunction<
         centered
         ref={focusTrapRef}
         closeOnClickOutside={false}
-        withCloseButton={true}
+        withCloseButton={false}
         closeOnEscape={false}
       >
         <div>
@@ -105,7 +105,7 @@ const TextQuestionComponent: React.ForwardRefRenderFunction<
             title={`Här är ledtråden för fråga ${questionNumber}:`}
             centered
             closeOnClickOutside={false}
-            withCloseButton={false}
+            withCloseButton={true}
             closeOnEscape={false}
             size="md"
           >
