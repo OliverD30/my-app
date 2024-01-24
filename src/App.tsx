@@ -27,7 +27,7 @@ function App() {
           <RouterSwitcher />
         </AppShell.Main>
         <AppShell.Footer zIndex={opened ? "auto" : 201}>
-          CONTENT
+          Sponsrad av Segeltorps IF
         </AppShell.Footer>
       </AppShell>
     </div>

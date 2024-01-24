@@ -1,8 +1,8 @@
 const Home = () => {
   return (
     <div>
-      <h1>Home </h1>
-      <p>Hi</p>
+      <h1>Hem </h1>
+      <p>Hej, det här är min sida som är under konstruktion, testa gärna quiz 1 i menyn </p>
     </div>
   );
 };

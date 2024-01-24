@@ -29,7 +29,7 @@ const Header = ({toggle, opened}: any) => {
               hiddenFrom="sm"
               size="sm"
             />
-            <div>My App</div>
+            <div>Olivers app</div>
             <Button size="sm" variant="link" onClick={toggleColorScheme}>
               {computedColorScheme === "dark" ? <FaSun /> : <FaMoon />}
             </Button>

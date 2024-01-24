@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import TextQuestionComponent from "../components/TextQuestion";
+import { Button } from "@mantine/core";
 
 const QuizPage1: React.FC = () => {
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState<
-    Array<{ question: string; answer: string; questionNumber: number }>
+    Array<{ question: string; answer: string; questionNumber: number; clue: string; }>
   >([
-    { question: "What is 2 + 2?", answer: "4", questionNumber: 1 },
-    { question: "Capital of France?", answer: "Paris", questionNumber: 2 },
-    { question: "a", answer: "a", questionNumber: 3 },
-    { question: "b", answer: "b", questionNumber: 4 },
-    { question: "c", answer: "c", questionNumber: 5 },
+    { question: "Vem har flest fortnite mvps i ranked trios?", answer: "oliver", questionNumber: 1, clue: 'Det är inte anton' },
+    { question: "När fyller jag år? (YYYY-MM-DD)", answer: "2003-03-07", questionNumber: 2, clue: 'Det var dagen jag föddes' },
+    { question: "Vad är Avons IQ?", answer: "10", questionNumber: 3, clue: 'Svaret är till närmaste 10-tal' },
+    { question: "Vilka typer av tjejer föredrar Anton?", answer: "Exotiska", questionNumber: 4, clue: 'Svaret är ett annat ord för sällsynta/utländska' },
+    { question: "Vad får man om man blandar musselpasta och hallon likör?", answer: "spya", questionNumber: 5, clue: 'Svaret rimmar med krya' },
+    { question: "Vilken stad vill jag till i sommar?", answer: "amsterdam", questionNumber: 6, clue: 'Det ligger i Nederländerna' },
+    { question: "Vad heter Tristans grundskole crush i förnamn?", answer: "klara", questionNumber: 7, clue: 'Hon spelade handboll' },
+    { question: "Har Anton begått ett brott när det kommer till mindreåriga och internet", answer: "ja", questionNumber: 9, clue: 'Det är ett givet svar' },
+    { question: "Vem är driftigast?", answer: "josefin", questionNumber: 8, clue: 'Det är Tristans största stolthet' },
+    { question: "Vart är det första stället utomlands Tristan åker till om han blir singel?", answer: "nice", questionNumber: 10, clue: 'Det ligger i södra Frankrike' },
   ]);
 
   const [isQuizStarted, setIsQuizStarted] = useState<boolean>(false);
@@ -51,7 +57,7 @@ const QuizPage1: React.FC = () => {
         setAllQuestionsAnswered(true);
 
         setTimeout(() => {
-          window.location.href = "/thank-you-quiz1"; // Replace "/main-page" with your actual main page URL
+          window.location.href = "/thank-you-quiz1"; 
         }, 2000);
       }
 
@@ -61,7 +67,7 @@ const QuizPage1: React.FC = () => {
 
   return (
     <div>
-      {!isQuizStarted && <button onClick={handleStartQuiz}>Start Quiz</button>}
+      {!isQuizStarted && <Button onClick={handleStartQuiz}>Starta Quiz</Button>}
 
       {isQuizStarted && !allQuestionsAnswered && (
         <div>
@@ -73,6 +79,7 @@ const QuizPage1: React.FC = () => {
               answer={qa.answer}
               onCompletion={handleQuestionCompletion}
               questionNumber={qa.questionNumber}
+              clue={qa.clue}
             />
           ))}
         </div>
@@ -80,7 +87,7 @@ const QuizPage1: React.FC = () => {
 
       {allQuestionsAnswered && (
         <p>
-          All questions are answered! Redirecting to the main page...
+          Du svarade rätt på alla frågor. Omdirigerar...
         </p>
       )}
     </div>

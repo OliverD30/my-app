@@ -18,19 +18,14 @@ const Navbar: React.FC<NavbarProps> = ({ closeHeader }) => {
   return (
     <AppShell.Navbar p="md" style={{ gap: "10px" }}>
         <NavLink
-        label="Home"
+        label="Hem"
         onClick={() => handleNavLinkClick("/")}
         style={{ margin: "5px" }}
         leftSection={<IconHome />}
       />
       <NavLink
-        label="1"
-        onClick={() => handleNavLinkClick("/text-component")}
-        style={{ margin: "5px" }}
-      />
-      <NavLink
-        label="2"
-        onClick={() => handleNavLinkClick("/button-component")}
+        label="Quiz 1"
+        onClick={() => handleNavLinkClick("/quiz1")}
         style={{ margin: "5px" }}
       />
     </AppShell.Navbar>
