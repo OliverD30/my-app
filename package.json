@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "gh-pages": "^6.1.1",
     "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.12.3",
