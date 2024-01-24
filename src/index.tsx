@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { createTheme, MantineProvider } from '@mantine/core';
-import {HashRouter} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 import '@mantine/core/styles.css';
 
 const theme = createTheme({
@@ -19,9 +19,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
      <MantineProvider theme={theme} defaultColorScheme='dark'>
-    <HashRouter>
+    <BrowserRouter>
     <App />
-    </HashRouter>
+    </BrowserRouter>
     </MantineProvider>
     </React.StrictMode>
 );
