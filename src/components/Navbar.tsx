@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ closeHeader }) => {
         style={{ margin: "5px" }}
       />
       <NavLink
-        label="Quiz 1"
+        label="Thank you page"
         onClick={() => handleNavLinkClick("/thank-you-quiz1")}
         style={{ margin: "5px" }}
       />
