@@ -13,8 +13,8 @@ const QuizPage1: React.FC = () => {
     { question: "Vad får man om man blandar musselpasta och hallon likör?", answer: "spya", questionNumber: 5, clue: 'Svaret rimmar med krya' },
     { question: "Vilken stad vill jag till i sommar?", answer: "amsterdam", questionNumber: 6, clue: 'Det ligger i Nederländerna' },
     { question: "Vad heter Tristans grundskole crush i förnamn?", answer: "klara", questionNumber: 7, clue: 'Hon spelade handboll' },
-    { question: "Har Anton begått ett brott när det kommer till mindreåriga och internet", answer: "ja", questionNumber: 9, clue: 'Det är ett givet svar' },
-    { question: "Vem är driftigast?", answer: "josefin", questionNumber: 8, clue: 'Det är Tristans största stolthet' },
+    { question: "Har Anton begått ett brott när det kommer till mindreåriga och internet", answer: "ja", questionNumber: 8, clue: 'Det är ett givet svar' },
+    { question: "Vem är driftigast?", answer: "josefin", questionNumber: 9, clue: 'Det är Tristans största stolthet' },
     { question: "Vart är det första stället utomlands Tristan åker till om han blir singel?", answer: "nice", questionNumber: 10, clue: 'Det ligger i södra Frankrike' },
   ]);
 
