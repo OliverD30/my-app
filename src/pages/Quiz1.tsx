@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import TextQuestionComponent from "../components/TextQuestion";
 import { Button } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 const QuizPage1: React.FC = () => {
   const [questionsAndAnswers] = useState<
@@ -17,7 +18,7 @@ const QuizPage1: React.FC = () => {
     { question: "Vem är driftigast?", answer: "josefin", questionNumber: 9, clue: 'Det är Tristans största stolthet' },
     { question: "Vart är det första stället utomlands Tristan åker till om han blir singel?", answer: "nice", questionNumber: 10, clue: 'Det ligger i södra Frankrike' },
   ]);
-
+  const navigate = useNavigate();
   const [isQuizStarted, setIsQuizStarted] = useState<boolean>(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [allQuestionsAnswered, setAllQuestionsAnswered] =
@@ -57,7 +58,7 @@ const QuizPage1: React.FC = () => {
         setAllQuestionsAnswered(true);
 
         setTimeout(() => {
-          window.location.href = "/thank-you-quiz1"; 
+          navigate("/my-app/thank-you-quiz1"); // Add your repository name
         }, 2000);
       }
 
