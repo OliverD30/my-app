@@ -1,5 +1,4 @@
 {
-  "homepage": "http://oliverD30.github.io/my-app",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -41,11 +40,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@types/body-parser": "^1.19.5",
     "gh-pages": "^6.1.1",
     "postcss": "^8.4.33",
     "postcss-preset-mantine": "^1.12.3",

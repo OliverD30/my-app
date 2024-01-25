@@ -28,7 +28,19 @@ const Navbar: React.FC<NavbarProps> = ({ closeHeader }) => {
         onClick={() => handleNavLinkClick("/quiz1")}
         style={{ margin: "5px" }}
       />
+      <NavLink
+        label="Thank you page"
+        onClick={() => handleNavLinkClick("/thank-you-quiz1")}
+        style={{ margin: "5px" }}
+      />
+      <NavLink
+        label="*"
+        onClick={() => handleNavLinkClick("/404")}
+        style={{ margin: "5px" }}
+      />
+    
     </AppShell.Navbar>
+
   );
 };
 
