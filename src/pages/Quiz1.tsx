@@ -12,11 +12,11 @@ const QuizPage1: React.FC = () => {
     { question: "Vad är Avons IQ?", answer: "10", questionNumber: 3, clue: 'Svaret är till närmaste 10-tal' },
     { question: "Vilka typer av tjejer föredrar Anton?", answer: "Exotiska", questionNumber: 4, clue: 'Svaret är ett annat ord för sällsynta/utländska' },
     { question: "Vad får man om man blandar musselpasta och hallon likör?", answer: "spya", questionNumber: 5, clue: 'Svaret rimmar med krya' },
-    { question: "Vilken stad vill jag till i sommar?", answer: "amsterdam", questionNumber: 6, clue: 'Det ligger i Nederländerna' },
-    { question: "Vad heter Tristans grundskole crush i förnamn?", answer: "klara", questionNumber: 7, clue: 'Hon spelade handboll' },
+    { question: "Är Samuel en bitch", answer: "ja", questionNumber: 6, clue: 'Givet' },
+    { question: "Vem är bäst i torpet?", answer: "stayfo", questionNumber: 7, clue: 'Skäggig man' },
     { question: "Har Anton begått ett brott när det kommer till mindreåriga och internet", answer: "ja", questionNumber: 8, clue: 'Det är ett givet svar' },
     { question: "Vem är driftigast?", answer: "josefin", questionNumber: 9, clue: 'Det är Tristans största stolthet' },
-    { question: "Vart är det första stället utomlands Tristan åker till om han blir singel?", answer: "nice", questionNumber: 10, clue: 'Det ligger i södra Frankrike' },
+    { question: "Vilket nationalitet är Samuel?", answer: "svensk", questionNumber: 10, clue: 'Var inte racist' },
   ]);
   const navigate = useNavigate();
   const [isQuizStarted, setIsQuizStarted] = useState<boolean>(false);
