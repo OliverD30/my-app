@@ -8,9 +8,9 @@ const RouterSwitcher = () => {
   return (
     <Routes>
       <Route path="/" element={<HomeComponent />} />
-      <Route path="*" element={<NotFound />} />
       <Route path="/quiz1" element={<QuizPage1 />} />
       <Route path="/thank-you-quiz1" element={<ThankYouQuiz1/>} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };

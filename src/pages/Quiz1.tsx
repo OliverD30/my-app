@@ -58,7 +58,7 @@ const QuizPage1: React.FC = () => {
         setAllQuestionsAnswered(true);
 
         setTimeout(() => {
-          navigate("/my-app/thank-you-quiz1"); 
+          navigate("/thank-you-quiz1"); 
         }, 2000);
       }
 
