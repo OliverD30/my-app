@@ -12,11 +12,12 @@ export default function Login({ handleLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); // State variable for loading status
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true); // Set loading to true when login request starts
-
+  
     const configuration = {
       method: "post",
       url: "https://auth-backend-theta.vercel.app/login",
@@ -25,7 +26,7 @@ export default function Login({ handleLogin }) {
         password,
       },
     };
-
+  
     axios(configuration)
       .then((result) => {
         cookies.set("TOKEN", result.data.token, {
@@ -35,13 +36,14 @@ export default function Login({ handleLogin }) {
         navigate("/home");
       })
       .catch((error) => {
-        console.error("Login failed", error);
+        console.error("Login failed", error.response.data.message); // Log the error message from the backend
+        // Update the state with the error message
+        setErrorMessage(error.response.data.message);
       })
       .finally(() => {
         setLoading(false); // Set loading to false when login request finishes
       });
   };
-
   const handleRegister = () => {
     // Navigate to the register page
     navigate("/register");
@@ -65,10 +67,10 @@ export default function Login({ handleLogin }) {
         style={{ width: "400px", marginTop: "20px", overflow: "hidden" }}
       >
  <div style={{ marginBottom: '16px', justifyContent: 'space-between', display: 'flex'}}> {/* Container for login button */}
-    <Button variant="outline" disabled color="grape" style={{ marginRight: '8px' }} fullWidth>
+    <Button variant="outline" color="grape" fullWidth style={{ pointerEvents: "none" }}>
       Login
     </Button>
-    <Button variant="outline" color="grape" onClick={handleRegister} fullWidth>
+    <Button variant="outline" color="gray" onClick={handleRegister} fullWidth>
       Register
     </Button>
   </div>
@@ -94,7 +96,7 @@ export default function Login({ handleLogin }) {
             placeholder="Password"
             required
           />
-
+{errorMessage && <div>{errorMessage}</div>}
           {/* submit button */}
           <Button variant="primary" type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"} {/* Change button text based on loading state */}

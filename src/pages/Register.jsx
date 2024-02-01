@@ -15,7 +15,7 @@ const Register = () => {
     isValid: false,
   });
   const [registerStatus, setRegisterStatus] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (field, value) => {
     setForm({
@@ -31,7 +31,7 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.isValid) {
-      setIsLoading(true); // Set isLoading to true when form is submitting
+      setIsLoading(true);
       axios
         .post("https://auth-backend-theta.vercel.app/register", {
           username: form.values.username,
@@ -40,20 +40,20 @@ const Register = () => {
         .then(() => {
           setRegisterStatus("success");
         })
-        .catch(() => {
-          setRegisterStatus("error");
-        })
-        .then(() => {
-          setIsLoading(false); // Set isLoading to false after request is complete
+        .catch((error) => {
+          if (error.response) {
+            setRegisterStatus(error.response.data.message);
+          } else {
+            setRegisterStatus("Error occurred during registration.");
+          }
         })
         .finally(() => {
-          handleLogin();
+          setIsLoading(false);
         });
     }
   };
 
   const handleLogin = () => {
-    // Navigate to the register page
     navigate("/");
   };
 
@@ -81,17 +81,15 @@ const Register = () => {
             display: "flex",
           }}
         >
-          {" "}
-          {/* Container for login button */}
           <Button
-            variant="outline"
-            color="grape"
+            variant="filled"
+            color="gray"
             onClick={handleLogin}
             fullWidth
           >
             Login
           </Button>
-          <Button variant="outline" disabled color="grape" fullWidth>
+          <Button variant="outline" color="grape" fullWidth>
             Register
           </Button>
         </div>
@@ -111,14 +109,10 @@ const Register = () => {
             required
           />
           <Button type="submit" loading={isLoading}>
-            {" "}
-            {/* Pass isLoading state to loading prop */}
-            {isLoading ? "Submitting..." : "Sign Up"}{" "}
-            {/* Change button text based on isLoading state */}
+            {isLoading ? "Submitting..." : "Sign Up"}
           </Button>
-          {registerStatus === "success" && <div>Registration successful!</div>}
-          {registerStatus === "error" && (
-            <div>Error occurred during registration.</div>
+          {registerStatus && (
+            <div style={{ color: "red" }}>{registerStatus}</div>
           )}
         </form>
       </Paper>
