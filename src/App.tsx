@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell } from "@mantine/core";
 import "./App.css";
@@ -7,9 +8,29 @@ import RouterSwitcher from "./components/RouterSwitcher";
 
 function App() {
   const [opened, { toggle }] = useDisclosure();
-  const closeHeader: () => void = () => {
+  const [auth, setAuth] = useState({ token: false });
+  const [loading, setLoading] = useState(true);
+
+  const closeHeader = () => {
     toggle();
   };
+
+  const handleLogin = (token: any) => {
+    setAuth({ token: token });
+  };
+
+  useEffect(() => {
+    // Simulate fetching authentication status
+    setTimeout(() => {
+      setLoading(false); // Set loading to false after authentication check
+    }, 1000); // Simulated delay
+  }, []);
+
+  if (loading) {
+    // Render loading indicator or any other UI element
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="App" style={{ marginTop: "20px" }}>
       <AppShell
@@ -21,14 +42,22 @@ function App() {
         }}
         padding="md"
       >
-        <Header toggle={toggle} opened={opened} />
-        <Navbar closeHeader={closeHeader} />
+        {auth.token !== false && (
+          // Conditionally render Header, Navbar, and Footer
+          <>
+            <Header toggle={toggle} opened={opened} />
+            <Navbar closeHeader={closeHeader} />
+          </>
+        )}
         <AppShell.Main>
-          <RouterSwitcher />
+          <RouterSwitcher handleLogin={handleLogin} auth={auth} />
         </AppShell.Main>
-        <AppShell.Footer zIndex={opened ? "auto" : 201}>
-          Sponsrad av Segeltorps IF
-        </AppShell.Footer>
+        {auth.token !== false && (
+          // Conditionally render Footer
+          <AppShell.Footer zIndex={opened ? "auto" : 201}>
+            Sponsrad av Segeltorps IF
+          </AppShell.Footer>
+        )}
       </AppShell>
     </div>
   );

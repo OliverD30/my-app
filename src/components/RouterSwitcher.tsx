@@ -3,15 +3,35 @@ import NotFound from "./NotFound";
 import QuizPage1 from "../pages/Quiz1";
 import HomeComponent from "../pages/Home";
 import ThankYouQuiz1 from "../pages/Thank-you-page-quiz1";
-import TodoComponent from "../pages/Todo";
+import Register from "../pages/Register";
+import Login from "../pages/Login";
+import PrivateRoutes from "./PrivateRoutes";
 
-const RouterSwitcher = () => {
+interface RouterSwitcherProps {
+  handleLogin: (token: any) => void; 
+  auth: { token: boolean };
+}
+
+const RouterSwitcher: React.FC<RouterSwitcherProps> = ({ handleLogin, auth }) => {
   return (
     <Routes>
-            <Route path="/" element={<HomeComponent />} />
-      <Route path="/todo" element={<TodoComponent />} />
-      <Route path="/quiz1" element={<QuizPage1 />} />
-      <Route path="/thank-you-quiz1" element={<ThankYouQuiz1 />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/"
+        element={<Login handleLogin={handleLogin} />}
+      />
+      <Route
+        path="/home"
+        element={<PrivateRoutes auth={auth}><HomeComponent /></PrivateRoutes>}
+      />
+      <Route
+        path="/quiz1"
+        element={<PrivateRoutes auth={auth}><QuizPage1 /></PrivateRoutes>}
+      />
+      <Route
+        path="/thank-you-quiz1"
+        element={<PrivateRoutes auth={auth}><ThankYouQuiz1 /></PrivateRoutes>}
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
