@@ -1,4 +1,4 @@
-import { Paper } from "@mantine/core";
+import { Paper, PasswordInput } from "@mantine/core";
 import { useState } from "react";
 import { Button, TextInput } from "@mantine/core";
 import axios from "axios";
@@ -87,7 +87,7 @@ export default function Login({ handleLogin }) {
           />
 
           {/* password */}
-          <TextInput
+          <PasswordInput
             label="Lösenord"
             id="password"
             type="password"
