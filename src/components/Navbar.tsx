@@ -1,6 +1,6 @@
 import { AppShell, NavLink } from "@mantine/core";
 import { To, useNavigate } from "react-router-dom";
-import { IconHome } from '@tabler/icons-react';
+import { IconClipboardText, IconHome, IconQuestionMark } from '@tabler/icons-react';
 
 
 interface NavbarProps {
@@ -23,12 +23,19 @@ const Navbar: React.FC<NavbarProps> = ({ closeHeader }) => {
         style={{ margin: "5px" }}
         leftSection={<IconHome />}
       />
+             <NavLink
+        label="Anslagstavlan"
+        onClick={() => handleNavLinkClick("/anslagstavlan")}
+        style={{ margin: "5px" }}
+        leftSection={< IconClipboardText/>}
+      />
       <NavLink
         label="Quiz 1"
         onClick={() => handleNavLinkClick("/quiz1")}
         style={{ margin: "5px" }}
+        leftSection={< IconQuestionMark/>}
       />
-    
+
     </AppShell.Navbar>
 
   );

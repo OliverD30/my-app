@@ -6,6 +6,7 @@ import ThankYouQuiz1 from "../pages/Thank-you-page-quiz1";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import PrivateRoutes from "./PrivateRoutes";
+import Anslagstavlan from "../pages/Anslagstavlan";
 
 interface RouterSwitcherProps {
   handleLogin: (token: any) => void; 
@@ -31,6 +32,10 @@ const RouterSwitcher: React.FC<RouterSwitcherProps> = ({ handleLogin, auth }) =>
       <Route
         path="/thank-you-quiz1"
         element={<PrivateRoutes auth={auth}><ThankYouQuiz1 /></PrivateRoutes>}
+      />
+      <Route
+        path="/anslagstavlan"
+        element={<PrivateRoutes auth={auth}><Anslagstavlan /></PrivateRoutes>}
       />
       <Route path="*" element={<NotFound />} />
     </Routes>

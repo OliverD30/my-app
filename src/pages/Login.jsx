@@ -29,9 +29,10 @@ export default function Login({ handleLogin }) {
   
     axios(configuration)
       .then((result) => {
-        cookies.set("TOKEN", result.data.token, {
-          path: "/",
-        });
+        // Save token and username as cookies
+        cookies.set("TOKEN", result.data.token, { path: "/" });
+        cookies.set("USERNAME", username, { path: "/" });
+  
         handleLogin(result.data.token); // Update the state with the token
         navigate("/");
       })
