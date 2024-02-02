@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell } from "@mantine/core";
+import { Helmet } from "react-helmet"; // Import Helmet
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
@@ -33,6 +34,9 @@ function App() {
 
   return (
     <div className="App" style={{ marginTop: "20px" }}>
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+      </Helmet>
       <AppShell
         header={{ height: 60 }}
         navbar={{

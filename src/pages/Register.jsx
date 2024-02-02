@@ -1,6 +1,5 @@
-import { Paper } from "@mantine/core";
 import React, { useState } from "react";
-import { Button, TextInput } from "@mantine/core";
+import { Paper, TextInput, Button, Text, PasswordInput } from "@mantine/core";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -24,7 +23,7 @@ const Register = () => {
         ...form.values,
         [field]: value,
       },
-      isValid: form.values.username !== "" && form.values.password !== "",
+      isValid: form.values.username !== "" && value.length > 5,
     });
   };
 
@@ -39,6 +38,7 @@ const Register = () => {
         })
         .then(() => {
           setRegisterStatus("success");
+          handleLogin();
         })
         .catch((error) => {
           if (error.response) {
@@ -46,15 +46,33 @@ const Register = () => {
           } else {
             setRegisterStatus("Error occurred during registration.");
           }
+          // Clear the password field
+          setForm({
+            ...form,
+            values: {
+              ...form.values,
+              password: "",
+            },
+          });
         })
         .finally(() => {
           setIsLoading(false);
         });
+    } else {
+      setRegisterStatus("Lösenordet måste vara minst 6 tecken långt.");
+      // Clear the password field
+      setForm({
+        ...form,
+        values: {
+          ...form.values,
+          password: "",
+        },
+      });
     }
   };
 
   const handleLogin = () => {
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -81,39 +99,38 @@ const Register = () => {
             display: "flex",
           }}
         >
-          <Button
-            variant="filled"
-            color="gray"
-            onClick={handleLogin}
-            fullWidth
-          >
-            Login
+          <Button variant="outline" color="gray" onClick={handleLogin} fullWidth>
+            Logga in
           </Button>
-          <Button variant="outline" color="grape" fullWidth>
-            Register
+          <Button variant="outline" color="grape" fullWidth style={{ pointerEvents: "none" }}>
+            Registrera
           </Button>
         </div>
-        <h2>Register</h2>
+        <h2>Registrera dig</h2>
         <form onSubmit={handleSubmit}>
           <TextInput
-            label="Username"
+            label="Användarnamn"
             value={form.values.username}
             onChange={(event) => handleChange("username", event.target.value)}
             required
+            placeholder="Välj ett användarnamn"
           />
-          <TextInput
-            label="Password"
+          <PasswordInput
+            label="Lösenord"
             type="password"
             value={form.values.password}
             onChange={(event) => handleChange("password", event.target.value)}
             required
-          />
-          <Button type="submit" loading={isLoading}>
-            {isLoading ? "Submitting..." : "Sign Up"}
-          </Button>
-          {registerStatus && (
-            <div style={{ color: "red" }}>{registerStatus}</div>
+            placeholder="Välj ett lösenord"
+          />{registerStatus && (
+            <Text color="red" size="sm" style={{ marginTop: "20px" }}>
+              {registerStatus}
+            </Text>
           )}
+          <Button type="submit" loading={isLoading} style={{ marginTop: "20px" }}>
+            {isLoading ? "Registrerar..." : "Registrera dig"}
+          </Button>
+          
         </form>
       </Paper>
     </div>

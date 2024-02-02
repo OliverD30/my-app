@@ -33,7 +33,7 @@ export default function Login({ handleLogin }) {
           path: "/",
         });
         handleLogin(result.data.token); // Update the state with the token
-        navigate("/home");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Login failed", error.response.data.message); // Log the error message from the backend
@@ -68,38 +68,38 @@ export default function Login({ handleLogin }) {
       >
  <div style={{ marginBottom: '16px', justifyContent: 'space-between', display: 'flex'}}> {/* Container for login button */}
     <Button variant="outline" color="grape" fullWidth style={{ pointerEvents: "none" }}>
-      Login
+      Logga in
     </Button>
     <Button variant="outline" color="gray" onClick={handleRegister} fullWidth>
-      Register
+      Registrera
     </Button>
   </div>
-        <h2>Login</h2>
+        <h2>Logga in</h2>
         <form onSubmit={handleSubmit}>
           {/* username */}
           <TextInput
-            label="Username"
+            label="Användarnamn"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter username"
+            placeholder="Ditt användarnamn"
             required
           />
 
           {/* password */}
           <TextInput
-            label="Password"
+            label="Lösenord"
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
+            placeholder="Ditt lösenord"
             required
           />
-{errorMessage && <div>{errorMessage}</div>}
+{errorMessage && <div style={{marginTop: '10px'}}>{errorMessage}</div>}
           {/* submit button */}
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"} {/* Change button text based on loading state */}
+          <Button variant="primary" type="submit" disabled={loading} style={{marginTop: '20px'}}>
+            {loading ? "Loggar in..." : "Logga in"} {/* Change button text based on loading state */}
           </Button>
         </form>
       </Paper>

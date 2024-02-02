@@ -17,11 +17,11 @@ const RouterSwitcher: React.FC<RouterSwitcherProps> = ({ handleLogin, auth }) =>
     <Routes>
       <Route path="/register" element={<Register />} />
       <Route
-        path="/"
+        path="/login"
         element={<Login handleLogin={handleLogin} />}
       />
       <Route
-        path="/home"
+        path="/"
         element={<PrivateRoutes auth={auth}><HomeComponent /></PrivateRoutes>}
       />
       <Route
