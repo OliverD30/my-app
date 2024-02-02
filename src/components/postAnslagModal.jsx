@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { TextInput, Button, FileInput, Modal } from "@mantine/core";
+import React, { useState, useEffect } from "react";
+import { TextInput, Button, FileInput, Modal, Alert } from "@mantine/core";
 import axios from "axios";
 import { useDisclosure } from '@mantine/hooks';
 import Cookies from "universal-cookie";
@@ -21,6 +21,7 @@ const PostAnslag = ( { handlePostSubmission }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [date, setDate] = useState(""); // Add state for current date
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
 
   useEffect(() => {
     // Retrieve the username from cookies
@@ -64,7 +65,6 @@ const PostAnslag = ( { handlePostSubmission }) => {
       });
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,15 +85,20 @@ const PostAnslag = ( { handlePostSubmission }) => {
         })
         .catch((error) => {
           if (error.response) {
-            setAnslagPost(error.response.data.message);
+            setAnslagPost(null); // Reset any previous success message
+            setErrorMessage(error.response.data.message); // Set error message
           } else {
-            setAnslagPost("Error occurred during registration.");
+            setAnslagPost(null); // Reset any previous success message
+            setErrorMessage("WHYWHYWHY"); // Set generic error message
           }
         })
         .finally(() => {
           setIsLoading(false);
         });
-    } 
+    } else {
+      // If form is not valid, display error message
+      setErrorMessage("Form is not valid. Please fill in all required fields.");
+    }
   };
 
   return (
@@ -122,17 +127,17 @@ const PostAnslag = ( { handlePostSubmission }) => {
             placeholder="Skriv ditt meddelande"
           />
           <FileInput
-  leftSection=""
-  placeholder="Ladda upp en bild"
-  variant="filled"
-  radius="md"
-  clearable
-  onChange={(files) => handleChange("image", files)}
-/>
+            leftSection=""
+            placeholder="Ladda upp en bild"
+            variant="filled"
+            radius="md"
+            clearable
+            onChange={(files) => handleChange("image", files)}
+          />
+          {errorMessage && <Alert color="red">{errorMessage}</Alert>} {/* Display error message */}
           <Button type="submit" loading={isLoading} style={{ marginTop: "20px" }}>
             {isLoading ? "Publicerar..." : "Publicera"}
           </Button>
-          
         </form>
       </Modal>
       <Button onClick={open}>Publicera ett meddelande</Button>
