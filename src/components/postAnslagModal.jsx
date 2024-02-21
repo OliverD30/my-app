@@ -36,23 +36,55 @@ const PostAnslag = ( { handlePostSubmission }) => {
     setDate(currentDate);
   }, []);
 
-  const handleChange = (field, file) => {
-    if (field === "image" && file) {
-      // Convert the selected file to base64
+  const resizeImage = (file, maxWidth, maxHeight) => {
+    return new Promise(resolve => {
       const reader = new FileReader();
-      reader.onload = () => {
-        console.log(reader.result); // Log the result to check if it's a valid base64 string
+      reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > maxWidth) {
+              height *= maxWidth / width;
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width *= maxHeight / height;
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL('image/jpeg'));
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  };
+
+  const handleChange = async (field, file) => {
+    if (field === "image" && file) {
+      try {
+        const resizedImage = await resizeImage(file, 800, 600); // Set your desired max width and height
         setForm({
           ...form,
           values: {
             ...form.values,
-            [field]: reader.result, // Set the base64 string as the value
+            [field]: resizedImage, // Set the resized image as the value
           },
           isValid: form.values.title !== "",
         });
-      };
-      // Read the selected file
-      reader.readAsDataURL(file);
+      } catch (error) {
+        console.error("Error resizing image:", error);
+      }
     } else {
       // For other fields, update the state as before
       setForm({
@@ -134,7 +166,7 @@ const PostAnslag = ( { handlePostSubmission }) => {
             clearable
             onChange={(files) => handleChange("image", files)}
           />
-          {errorMessage && <Alert color="red">{errorMessage}</Alert>} {/* Display error message */}
+          {errorMessage && <Alert color="red">{errorMessage}</Alert>} 
           <Button type="submit" loading={isLoading} style={{ marginTop: "20px" }}>
             {isLoading ? "Publicerar..." : "Publicera"}
           </Button>

@@ -52,19 +52,60 @@ const Anslagstavlan = () => {
       <h1>Anslagstavlan</h1>
       <p>Detta är Anslagstavlan</p>
       <PostAnslag handlePostSubmission={handlePostSubmission} />
-      {/* Map over the anslag array and render Paper component for each object */}
-      {anslagData && anslagData.anslag.map(anslagItem => (
-        <Paper key={anslagItem._id} shadow="sm" style={{ marginBottom: "20px" }}>
-          <h3>{anslagItem.title}</h3>
-          <p>{anslagItem.body}</p>
-          {anslagItem.image && (
-            <img src={anslagItem.image} alt="Anslag Image" style={{ maxWidth: "100%" }} />
-          )}
-          <p>Posted by: {anslagItem.username}</p>
-          <p>Date: {anslagItem.date}</p>
-          <Button onClick={() => handleDelete(anslagItem._id)}>Delete</Button>
-        </Paper>
-      ))}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      
+      {anslagData &&
+        anslagData.anslag.map((anslagItem) => (
+          <Paper
+            key={anslagItem._id}
+            shadow="xl"
+            style={{
+              marginBottom: "20px",
+              position: "relative",
+              width: "100%", // Set width to 100% by default
+              marginRight: "20px",
+              // Adjust width for different screen sizes
+              "@media (min-width: 768px)": {
+                width: "calc(33.33% - 20px)", // Set width to approximately 33.33% for tablets and larger
+              },
+              "@media (max-width: 767px)": {
+                width: "calc(100% - 20px)", // Set width to 100% for mobile
+              },
+            }}
+            withBorder
+          >
+            <div style={{ textAlign: "center", marginBottom: "10px" }}>
+              <h3 style={{ fontSize: "24px", margin: "0" }}>{anslagItem.title}</h3>
+              <p style={{ fontSize: "12px", margin: "0" }}>Posted by: {anslagItem.username}</p>
+            </div>
+            {anslagItem.image && (
+              <div style={{ textAlign: "center", marginBottom: "10px" }}>
+                <img
+                  src={anslagItem.image}
+                  alt="Anslag Image"
+                  style={{ maxWidth: "90%", borderRadius: "8px" }}
+                />
+              </div>
+            )}
+            <p style={{ marginBottom: "10px" }}>{anslagItem.body}</p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "12px", margin: "0" }}>Date: {anslagItem.date}</p>
+              <Button
+                onClick={() => handleDelete(anslagItem._id)}
+                style={{ fontSize: "12px" }}
+              >
+                Delete
+              </Button>
+            </div>
+          </Paper>
+        ))}
+    </div>
     </div>
   );
 };
